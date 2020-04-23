@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'noTeam',
 
@@ -50,6 +52,11 @@ export default {
       id: ''
     };
   },
+
+  computed: {
+    ...mapState(['uId'])
+  },
+
   methods: {
     // 展示
     Show (option) {
@@ -57,13 +64,52 @@ export default {
     },
 
     // 创建
-    CreateTeam () {
-      console.log('create');
+    async CreateTeam () {
+      try {
+        const res = await this.$axios.post(`${this.HOST}/createTeam`, {
+          u_id: this.uId,
+          team_name: this.name,
+          member_num: this.number
+        });
+        const info = res.data;
+        if (info.code === 200) {
+          this.$message({
+            type: 'success',
+            message: '创建成功'
+          });
+        } else {
+          this.$message({
+            type: 'error',
+            message: info.message
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
     },
 
     // 加入
-    JoinTeam () {
-      console.log('join');
+    async JoinTeam () {
+      try {
+        const res = await this.$axios.post(`${this.HOST}/joinTeam`, {
+          u_id: this.uId,
+          team_id: this.id
+        });
+        const info = res.data;
+        if (info.code === 200) {
+          this.$message({
+            type: 'success',
+            message: '加入成功'
+          });
+        } else {
+          this.$message({
+            type: 'error',
+            message: info.message
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 };

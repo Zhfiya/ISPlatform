@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import NoTeam from '../Team/NoTeam';
 import HasTeam from '../Team/HasTeam';
 
@@ -16,10 +17,20 @@ export default {
     HasTeam // 有战队
   },
 
+  computed: {
+    ...mapState(['teamId'])
+  },
+
   data () {
     return {
-      isTeam: false
+      isTeam: true
     };
+  },
+
+  created () {
+    if (this.teamId) {
+      this.isTeam = true;
+    }
   }
 };
 </script>

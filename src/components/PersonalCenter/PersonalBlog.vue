@@ -26,22 +26,22 @@
                 <label><i class="el-icon-collection-tag"></i>分类：</label>
             </div>
             <div class="row tag_row">
-                <label name="tag" @click="SelectType('loophole')" :class="{active:type==='loophole'}">
+                <label name="tag" @click="SelectType('漏洞专区')" :class="{active:type==='漏洞专区'}">
                     <i class="el-icon-paperclip"></i>漏洞专区
                 </label>
-                <label name="tag" @click="SelectType('ctf')" :class="{active:type==='ctf'}">
+                <label name="tag" @click="SelectType('CTF记录')" :class="{active:type==='CTF记录'}">
                     <i class="el-icon-paperclip"></i>CTF记录
                 </label>
-                <label name="tag" @click="SelectType('awd')" :class="{active:type==='awd'}">
+                <label name="tag" @click="SelectType('AWD总结')" :class="{active:type==='AWD总结'}">
                     <i class="el-icon-paperclip"></i>AWD总结
                 </label>
-                <label name="tag" @click="SelectType('basic')" :class="{active:type==='basic'}">
+                <label name="tag" @click="SelectType('基础知识')" :class="{active:type==='基础知识'}">
                     <i class="el-icon-paperclip"></i>基础知识
                 </label>
-                <label name="tag" @click="SelectType('audit')" :class="{active:type==='audit'}">
+                <label name="tag" @click="SelectType('代码审计')" :class="{active:type==='代码审计'}">
                     <i class="el-icon-paperclip"></i>代码审计
                 </label>
-                <label name="tag" @click="SelectType('nothing')" :class="{active:type==='nothing'}">
+                <label name="tag" @click="SelectType('水帖')" :class="{active:type==='水帖'}">
                     <i class="el-icon-paperclip"></i>水帖
                 </label>
             </div>

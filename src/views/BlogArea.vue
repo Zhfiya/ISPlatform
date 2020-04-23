@@ -4,22 +4,22 @@
             <label name="tag" @click="SelectType('all')" :class="{active:type==='all'}">
                 <i class="el-icon-magic-stick"></i>推荐
             </label>
-            <label name="tag" @click="SelectType('loophole')" :class="{active:type==='loophole'}">
+            <label name="tag" @click="SelectType('漏洞专区')" :class="{active:type==='漏洞专区'}">
                 <i class="el-icon-monitor"></i>漏洞专区
             </label>
-            <label name="tag" @click="SelectType('ctf')" :class="{active:type==='ctf'}">
+            <label name="tag" @click="SelectType('CTF记录')" :class="{active:type==='CTF记录'}">
                 <i class="el-icon-edit-outline"></i>CTF记录
             </label>
-            <label name="tag" @click="SelectType('awd')" :class="{active:type==='awd'}">
+            <label name="tag" @click="SelectType('AWD总结')" :class="{active:type==='AWD总结'}">
                 <i class="el-icon-notebook-1"></i>AWD总结
             </label>
-            <label name="tag" @click="SelectType('basic')" :class="{active:type==='basic'}">
+            <label name="tag" @click="SelectType('基础知识')" :class="{active:type==='基础知识'}">
                 <i class="el-icon-coordinate"></i>基础知识
             </label>
-            <label name="tag" @click="SelectType('audit')" :class="{active:type==='audit'}">
+            <label name="tag" @click="SelectType('代码审计')" :class="{active:type==='代码审计'}">
                 <i class="el-icon-search"></i>代码审计
             </label>
-            <label name="tag" @click="SelectType('nothing')" :class="{active:type==='nothing'}">
+            <label name="tag" @click="SelectType('水帖')" :class="{active:type==='水帖'}">
                 <i class="el-icon-mobile-phone"></i>水帖
             </label>
         </div>

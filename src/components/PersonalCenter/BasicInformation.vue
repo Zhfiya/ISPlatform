@@ -106,12 +106,13 @@ export default {
           u_id: this.uId
         });
         const info = res.data.data;
-        // console.log(info);
+        console.log(info);
         this.id = info.u_id;
         this.sex = info.sex;
         this.name = info.name;
         this.email = info.email;
         this.introduction = info.information;
+        this.$store.dispatch('set_teamId', info.team_id);
       } catch (err) {
         console.log(err);
       }

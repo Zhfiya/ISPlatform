@@ -18,27 +18,27 @@
                 <label><i class="el-icon-collection-tag"></i>分类：</label>
                 <label>{{ this.tag }}</label>
             </div>
-            <span @click="SelectTag('loophole')">
+            <span @click="SelectTag('漏洞专区')">
                 <i class="el-icon-d-arrow-right"></i>
                 漏洞专区
             </span>
-            <span @click="SelectTag('ctf')">
+            <span @click="SelectTag('CTF记录')">
                 <i class="el-icon-d-arrow-right"></i>
                 CTF记录
             </span>
-            <span @click="SelectTag('awd')">
+            <span @click="SelectTag('AWD总结')">
                 <i class="el-icon-d-arrow-right"></i>
                 AWD总结
             </span>
-            <span @click="SelectTag('basic')">
+            <span @click="SelectTag('基础知识')">
                 <i class="el-icon-d-arrow-right"></i>
                 基础知识
             </span>
-            <span @click="SelectTag('audit')">
+            <span @click="SelectTag('代码审计')">
                 <i class="el-icon-d-arrow-right"></i>
                 代码审计
             </span>
-            <span @click="SelectTag('nothing')">
+            <span @click="SelectTag('水帖')">
                 <i class="el-icon-d-arrow-right"></i>
                 水帖
             </span>
@@ -216,7 +216,6 @@ export default {
       border: 0;
       outline: none;
       text-decoration: none;
-      margin-left: 5%;
       margin-bottom: 30px;
       padding: 5px 10px;
       border-radius: 3px;
