@@ -77,6 +77,7 @@ export default {
             type: 'success',
             message: '创建成功'
           });
+          this.$store.dispatch('set_teamId', info.data);
         } else {
           this.$message({
             type: 'error',
@@ -101,6 +102,7 @@ export default {
             type: 'success',
             message: '加入成功'
           });
+          this.$store.dispatch('set_teamId', this.id);
         } else {
           this.$message({
             type: 'error',

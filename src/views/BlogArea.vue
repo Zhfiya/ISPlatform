@@ -25,7 +25,7 @@
         </div>
         <div class="blog">
             <div class="block">
-                <el-carousel height="150px">
+                <el-carousel height="285px">
                     <el-carousel-item v-for="item in 4" :key="item">
                         <h3>{{ item }}</h3>
                     </el-carousel-item>
@@ -78,10 +78,13 @@ export default {
     flex-direction: row;
 
     .tags {
-        width: 120px;
-        margin-left: 200px;
+        width: 180px;
+        margin-left: 150px;
         display: flex;
         flex-direction: column;
+        position: fixed;
+        text-align: center;
+        background-color: #F1F1F1;
         label {
             border-radius: 2px;
             padding: 10px;
@@ -93,11 +96,12 @@ export default {
         }
     }
     .blog {
-        margin-left: 20px;
+        margin-left: 340px;
         width: 60%;
 
         .block {
-            margin-bottom: 20px;
+            height: 300px;
+            margin-bottom: 10px;
         }
         .el-carousel__item h3 {
             color: white;

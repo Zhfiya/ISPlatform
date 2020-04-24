@@ -7,31 +7,37 @@
             <span class="head">性别</span>
             <span class="head" name="email">邮箱</span>
         </div>
-        <div class="row">
-            <span class="id"><i class="el-icon-medal"></i>111111</span>
-            <span>fine</span>
-            <span>保密</span>
-            <span>Paranoid_ZH@163.com</span>
-        </div>
-        <div class="row">
-            <span><i class="el-icon-medal"></i>222222</span>
-            <span>swhxdkxxxxxxxxxxjcldkl</span>
-            <span>女</span>
+        <div
+        v-for="item in teamMember"
+        :key="item.u_id"
+        class="row">
+            <span class="id"><i class="el-icon-medal"></i>{{ item.u_id }}</span>
+            <span>{{ item.name }}</span>
+            <span>{{ item.sex }}</span>
+            <span>{{ item.email }}</span>
         </div>
         <div class="submit">
-            <button><i class="el-icon-error"></i>退队</button>
+            <button @click="QuitTeam"><i class="el-icon-error"></i>退队</button>
         </div>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'hasTeam',
 
   data () {
     return {
-      teamName: '嘻嘿哈'
+      teamName: '嘻嘿哈',
+      teamId: '',
+      teamMember: []
     };
+  },
+
+  computed: {
+    ...mapState(['uId'])
   },
 
   created () {
@@ -46,16 +52,32 @@ export default {
           u_id: this.uId
         });
         const info = res.data;
+        console.log(info);
+        if (info.code === 200) {
+          this.teamName = info.data.team_name;
+          this.teamId = info.data.team_id;
+          this.teamMember = info.data.member;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    // 退出队伍
+    async QuitTeam () {
+      try {
+        const res = await this.$axios.post(`${this.HOST}/quitTeam`, {
+          u_id: this.uId,
+          team_id: this.teamId
+        });
+        const info = res.data;
+        console.log(info);
         if (info.code === 200) {
           this.$message({
             type: 'success',
-            message: '创建成功'
+            message: '退队成功！'
           });
-        } else {
-          this.$message({
-            type: 'error',
-            message: info.message
-          });
+          this.$store.dispatch('set_teamId', null);
         }
       } catch (err) {
         console.log(err);

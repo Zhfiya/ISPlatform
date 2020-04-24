@@ -5,8 +5,11 @@
       :key="item.blog_id"
       class="blog">
         <div class="blog_row" @click="ToDetail(item)">
-          <label class="tag">{{ item.tag }}</label>
-          <label class="name">{{ item.name }}</label>
+          <div>
+            <label class="tag">{{ item.tag }}</label>
+            <label class="name">{{ item.name }}</label>
+          </div>
+          <div><i class="el-icon-circle-close"></i></div>
         </div>
         <div class="row">
           <div>
@@ -153,7 +156,7 @@ export default {
           tag: this.tag
         });
         const info = res.data;
-        // console.log(info);
+        console.log(info);
         if (info.code === 200) {
           this.blogList = info.data;
         }
@@ -175,14 +178,17 @@ export default {
   .blog {
     background-color: #F7F7F7;
     margin-bottom: 10px;
-    height: 70px;
+    height: 80px;
     padding: 5px 15px;
     display: flex;
     flex-direction: column;
 
     .blog_row {
-      margin: 10px 0 0 10px;
+      margin: 15px 0 0 10px;
       cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+
       .tag {
         color: #F58813;
         background-color: #FCDF96;

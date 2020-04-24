@@ -1,5 +1,5 @@
 <template>
-    <div id="teamInformation">
+    <div id="teamInformation" v-if="update">
         <NoTeam v-if="!isTeam"/>
         <HasTeam v-else/>
     </div>
@@ -21,9 +21,26 @@ export default {
     ...mapState(['teamId'])
   },
 
+  watch: {
+    teamId (val) {
+      this.update = false;
+      // 在组件移除后，重新渲染组件
+      // this.$nextTick可实现在DOM 状态更新后，执行传入的方法。
+      this.$nextTick(() => {
+        if (val) {
+          this.isTeam = true;
+        } else {
+          this.isTeam = false;
+        }
+        this.update = true;
+      });
+    }
+  },
+
   data () {
     return {
-      isTeam: true
+      isTeam: false,
+      update: true
     };
   },
 
