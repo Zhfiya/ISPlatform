@@ -15,7 +15,7 @@
                     显示全部博客
                 </label>
             </div>
-            <BlogList :type="type" :order="order" :typeOfTime="timeOrder" v-if="isBlog"/>
+            <BlogList :type="type" :order="order" :typeOfTime="timeOrder" v-if="isBlog" @count="CountList"/>
         </div>
         <div class="right">
             <div class="row">
@@ -98,6 +98,12 @@ export default {
       this.$nextTick(() => {
         this.isBlog = true;
       });
+    },
+
+    // 显示博客和点赞量
+    CountList (data) {
+      this.blogNum = data.blogNum;
+      this.likeNum = data.likeNum;
     }
   }
 };

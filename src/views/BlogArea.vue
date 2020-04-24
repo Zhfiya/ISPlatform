@@ -52,10 +52,6 @@ export default {
     };
   },
 
-  created () {
-    console.log('a');
-  },
-
   methods: {
     // 选择查看博客类型
     SelectType (type) {
@@ -97,7 +93,7 @@ export default {
     }
     .blog {
         margin-left: 340px;
-        width: 60%;
+        width: 870px;
 
         .block {
             height: 300px;

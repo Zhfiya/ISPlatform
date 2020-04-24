@@ -68,8 +68,7 @@ export default {
 
   label{
     color: white;
-    font-size: 40px;
-    font-family: FZYaoti;
+    font-size: 33px;
     float: left;
     margin-left: 10%;
     margin-top: 10px;
@@ -90,6 +89,7 @@ export default {
       cursor: pointer;
       padding: 10px;
       margin-right: 5%;
+      font-size: 18px;
     }
   }
 }

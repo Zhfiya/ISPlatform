@@ -5,11 +5,8 @@
       :key="item.blog_id"
       class="blog">
         <div class="blog_row" @click="ToDetail(item)">
-          <div>
-            <label class="tag">{{ item.tag }}</label>
-            <label class="name">{{ item.name }}</label>
-          </div>
-          <div><i class="el-icon-circle-close"></i></div>
+          <label class="tag">{{ item.tag }}</label>
+          <label class="name">{{ item.name }}</label>
         </div>
         <div class="row">
           <div>
@@ -57,6 +54,7 @@ export default {
       time: '2020-02-02 02:02:02',
       like: 0,
       blogList: [],
+      countList: [],
 
       update: true
     };
@@ -132,6 +130,8 @@ export default {
           // console.log(info.data);
           if (info.code === 200) {
             this.blogList = info.data;
+            this.Count();
+            this.$emit('count', this.countList);
           }
         } else {
           const res = await this.$axios.post(`${this.HOST}/sortBlogByLike`, {
@@ -141,6 +141,8 @@ export default {
           const info = res.data;
           if (info.code === 200) {
             this.blogList = info.data;
+            this.Count();
+            this.$emit('count', this.countList);
           }
         }
       } catch (err) {
@@ -162,6 +164,20 @@ export default {
         }
       } catch (err) {
         console.log(err);
+      }
+    },
+
+    // 计算博客数量及或赞数
+    Count () {
+      if (this.countList) {
+        let likeNum = 0;
+        this.countList.push({ blogNum: this.blogList.length });
+        this.blogList.forEach((item) => {
+          likeNum = likeNum + item.like_num;
+        });
+        this.countList = { likeNum: likeNum, blogNum: this.countList.length };
+      } else {
+        this.countList = { likeNum: 0, blogNum: 0 };
       }
     }
   }
@@ -186,9 +202,6 @@ export default {
     .blog_row {
       margin: 15px 0 0 10px;
       cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-
       .tag {
         color: #F58813;
         background-color: #FCDF96;
