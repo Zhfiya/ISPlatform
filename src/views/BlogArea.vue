@@ -25,11 +25,23 @@
         </div>
         <div class="blog">
             <div class="block">
-                <el-carousel height="285px">
+                <el-carousel height="245px">
                     <el-carousel-item v-for="item in 4" :key="item">
                         <h3>{{ item }}</h3>
                     </el-carousel-item>
                 </el-carousel>
+            </div>
+            <div class="select_row">
+                <i class="el-icon-search"></i>
+                <div class="input_box">
+                    <el-input
+                    placeholder="请输入内容"
+                    v-model="input"
+                    clearable
+                    size="small">
+                    </el-input>
+                </div>
+                <button>搜索</button>
             </div>
             <BlogList :tag="type" v-if="update"/>
         </div>
@@ -96,8 +108,7 @@ export default {
         width: 870px;
 
         .block {
-            height: 300px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .el-carousel__item h3 {
             color: white;
@@ -114,6 +125,16 @@ export default {
 
         .el-carousel__item:nth-child(2n+1) {
             background-color: #d3dce6;
+        }
+        .select_row {
+            width: 100%;
+            margin-bottom: 30px;
+            font-size: 24px;
+            line-height: 24px;
+            text-align: right;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
         }
     }
     .active {

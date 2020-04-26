@@ -1,57 +1,57 @@
 <template>
-    <div id="securitySetting">
-        <label class="tip">本页面涉及邮箱、密码的重新设定，修改本页面资料都需要通过邮箱验证❗</label>
-        <div class="row">
-            <label>邮箱：</label>
-            <label>{{ this.email }}</label>
-            <button @click="Check" v-if="!isOk && isSend" :disabled="!isSend">发送验证码</button>
-            <button v-if="!isOk && !isSend">{{ second }}s</button>
-        </div>
-        <div class="row" v-if="isCheck">
-            <label for="checkCode">验证码：</label>
-            <input type="text" id="checkCode" v-model="code">
-            <button @click="SubmitCode">验证</button>
-        </div>
-        <div class="link_row" v-if="isOk">
-            <label @click="ShowItem('pwd')" :class="{active:pwdShow}">
-                <i class="el-icon-warning"></i>
-                修改密码
-            </label>
-            <div class="update_row" v-if="pwdShow">
-                <div>
-                    <input type="password" id="newPwd" v-model="newPwd" name="newPwd" placeholder="新密码...">
-                    <span v-if=" newPwd && newPwd.length < 8"><i class="el-icon-warning"></i>密码少于8位！</span>
-                </div>
-                <div>
-                    <input type="password" id="newPwdB" v-model="newPwdB" name="newPwd" placeholder="确认密码...">
-                    <span v-if="newPwdB && newPwdB !== newPwd"><i class="el-icon-warning"></i>两次输入不一致！</span>
-                </div>
-                <div>
-                    <button class="submit" @click="SubmitNewPwd()"><i class="el-icon-upload2"></i>提交</button>
-                    <span class="return" @click="Return('pwd')">
-                        <i class="el-icon-circle-close"></i>取消
-                    </span>
-                </div>
-            </div>
-            <label @click="ShowItem('email')" :class="{active:emailShow}">
-                <i class="el-icon-warning"></i>
-                修改邮箱
-            </label>
-            <div class="update_row" v-if="emailShow">
-                <div>
-                    <input type="text" id="newPwd" v-model="newEmail" name="newPwd" placeholder="新邮箱...">
-                    <button @click="CheckCode">发送验证码</button>
-                </div>
-                <input type="text" id="newPwdB" v-model="newCode" name="newPwd" placeholder="验证码...">
-                <div>
-                    <button class="submit" @click="SubmitNewEmail()"><i class="el-icon-upload2"></i>提交</button>
-                    <span class="return" @click="Return('email')">
-                        <i class="el-icon-circle-close"></i>取消
-                    </span>
-                </div>
-            </div>
-        </div>
+  <div id="securitySetting">
+    <label class="tip">本页面涉及邮箱、密码的重新设定，修改本页面资料都需要通过邮箱验证❗</label>
+    <div class="row">
+      <label>邮箱：</label>
+      <label>{{ this.email }}</label>
+      <button @click="Check" v-if="!isOk && isSend" :disabled="!isSend">发送验证码</button>
+      <button v-if="!isOk && !isSend">{{ second }}s</button>
     </div>
+    <div class="row" v-if="isCheck">
+      <label for="checkCode">验证码：</label>
+      <input type="text" id="checkCode" v-model="code">
+      <button @click="SubmitCode">验证</button>
+    </div>
+      <div class="link_row" v-if="isOk">
+        <label @click="ShowItem('pwd')" :class="{active:pwdShow}">
+          <i class="el-icon-warning"></i>
+          修改密码
+        </label>
+        <div class="update_row" v-if="pwdShow">
+          <div>
+            <input type="password" id="newPwd" v-model="newPwd" name="newPwd" placeholder="新密码...">
+            <span v-if=" newPwd && newPwd.length < 8"><i class="el-icon-warning"></i>密码少于8位！</span>
+          </div>
+          <div>
+            <input type="password" id="newPwdB" v-model="newPwdB" name="newPwd" placeholder="确认密码...">
+            <span v-if="newPwdB && newPwdB !== newPwd"><i class="el-icon-warning"></i>两次输入不一致！</span>
+          </div>
+          <div>
+            <button class="submit" @click="SubmitNewPwd()"><i class="el-icon-upload2"></i>提交</button>
+            <span class="return" @click="Return('pwd')">
+              <i class="el-icon-circle-close"></i>取消
+            </span>
+          </div>
+        </div>
+        <label @click="ShowItem('email')" :class="{active:emailShow}">
+          <i class="el-icon-warning"></i>
+          修改邮箱
+        </label>
+        <div class="update_row" v-if="emailShow">
+          <div>
+            <input type="text" id="newPwd" v-model="newEmail" name="newPwd" placeholder="新邮箱...">
+            <button @click="CheckCode">发送验证码</button>
+          </div>
+          <input type="text" id="newPwdB" v-model="newCode" name="newPwd" placeholder="验证码...">
+          <div>
+            <button class="submit" @click="SubmitNewEmail()"><i class="el-icon-upload2"></i>提交</button>
+            <span class="return" @click="Return('email')">
+              <i class="el-icon-circle-close"></i>取消
+            </span>
+          </div>
+        </div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -306,7 +306,7 @@ export default {
     .update_row {
       display: flex;
       flex-direction: column;
-      width: 55%;
+      width: 500px;
       margin-left: 2%;
       padding: 5%;
       border: 1px solid white;;
@@ -314,7 +314,7 @@ export default {
 
       input {
         margin: 0 0 5% 0;
-        width: 70%;
+        width: 50%;
       }
       button {
         background-color: #DDBB99;
@@ -335,6 +335,9 @@ export default {
         margin-left: 25%;
       }
     }
+  }
+  i {
+    margin-right: 5px;
   }
 }
 </style>
