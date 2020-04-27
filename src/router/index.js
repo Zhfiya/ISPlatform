@@ -36,6 +36,11 @@ const routes = [
     component: () => import('../components/Blog/BlogDetail')
   },
   {
+    path: '/updateBlog',
+    name: 'updateBlog',
+    component: () => import('../components/Blog/UpdateBlog')
+  },
+  {
     path: '/blogArea',
     name: 'blogArea',
     component: () => import('../views/BlogArea')

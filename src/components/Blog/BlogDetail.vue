@@ -63,7 +63,7 @@ export default {
           this.uploadTime = infodata.upload_time;
           this.like = infodata.like_num;
           this.isLike = infodata.is_like;
-          this.content = infodata.text;
+          this.content = infodata.html;
           this.author = infodata.author_name;
         }
       } catch (err) {

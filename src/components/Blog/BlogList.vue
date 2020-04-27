@@ -15,9 +15,9 @@
             <span><i class="el-icon-star-on"></i>获赞量：{{ item.like_num }}</span>
           </div>
           <div v-if="typeOfTime">
-            <span class="update">修改</span>
+            <span class="update" @click="ToUpdate(item)">修改</span>
             <span>|</span>
-            <span class="update" @click="confirm">删除</span>
+            <span class="update" @click="confirm(item.blog_id)">删除</span>
           </div>
         </div>
       </div>
@@ -42,6 +42,9 @@ export default {
     },
     typeOfTime: {
       required: false
+    },
+    blogs: {
+      required: false
     }
   },
 
@@ -55,6 +58,7 @@ export default {
       like: 0,
       blogList: [],
       countList: [],
+      deteleBlogId: '',
 
       update: true
     };
@@ -71,6 +75,15 @@ export default {
     }
   },
 
+  watch: {
+    blogs (val) {
+      if (val) {
+        this.blogList = val;
+        this.Count();
+      }
+    }
+  },
+
   methods: {
     // 查看博客
     ToDetail (blog) {
@@ -83,13 +96,24 @@ export default {
       window.open(href, '_blank');
     },
 
+    // 修改博客
+    ToUpdate (blog) {
+      const blogId = blog.blog_id;
+      const { href } = this.$router.resolve({
+        path: '/updateBlog',
+        query: { blogId: blogId }
+      });
+      window.open(href, '_blank');
+    },
+
     // 删除博客
-    confirm () {
+    confirm (blogId) {
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        this.deteleBlogId = blogId;
         this.DeteleBlog();
       }).catch(() => {
         this.$message({
@@ -101,17 +125,25 @@ export default {
     async DeteleBlog () {
       try {
         const res = await this.$axios.post(`${this.HOST}/deleteBlog`, {
-          blog_id: this.blogId
+          blog_id: this.deteleBlogId
         });
         const info = res.data;
         console.log(info);
-        this.update = false;
-        // 在组件移除后，重新渲染组件
-        // this.$nextTick可实现在DOM 状态更新后，执行传入的方法。
-        this.$nextTick(() => {
-          this.update = true;
-          this.OrderBlog();
-        });
+        if (info.code === 200) {
+          this.update = false;
+          // 在组件移除后，重新渲染组件
+          // this.$nextTick可实现在DOM 状态更新后，执行传入的方法。
+          this.$nextTick(() => {
+            this.update = true;
+            this.OrderBlog();
+          });
+          this.deteleBlogId = '';
+        } else {
+          this.$message({
+            type: 'error',
+            message: info.message
+          });
+        }
       } catch (err) {
         console.log(err);
       }
@@ -169,13 +201,13 @@ export default {
 
     // 计算博客数量及或赞数
     Count () {
-      if (this.countList) {
+      if (this.blogList) {
         let likeNum = 0;
-        this.countList.push({ blogNum: this.blogList.length });
+        const blogNum = this.blogList.length;
         this.blogList.forEach((item) => {
           likeNum = likeNum + item.like_num;
         });
-        this.countList = { likeNum: likeNum, blogNum: this.countList.length };
+        this.countList = { likeNum: likeNum, blogNum: blogNum };
       } else {
         this.countList = { likeNum: 0, blogNum: 0 };
       }

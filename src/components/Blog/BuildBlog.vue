@@ -61,6 +61,12 @@ export default {
     ...mapState(['uId'])
   },
 
+  props: {
+    blogInfo: {
+      required: false
+    }
+  },
+
   data () {
     return {
       tag: '',
@@ -69,6 +75,18 @@ export default {
       html: '',
       blogId: 0
     };
+  },
+
+  created () {
+    if (this.blogInfo) {
+      this.title = this.blogInfo.name;
+      this.tag = this.blogInfo.tag;
+      if (this.blogInfo.content) {
+        this.content = this.blogInfo.content;
+      }
+      this.blogId = this.blogInfo.blog_id;
+    }
+    console.log(this.blogInfo);
   },
 
   methods: {
@@ -127,6 +145,7 @@ export default {
             u_id: this.uId,
             name: this.title,
             text: this.html,
+            content: this.content,
             tag: this.tag
           });
           const info = res.data;

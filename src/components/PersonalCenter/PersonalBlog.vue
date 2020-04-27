@@ -102,6 +102,7 @@ export default {
 
     // 显示博客和点赞量
     CountList (data) {
+      console.log(data);
       this.blogNum = data.blogNum;
       this.likeNum = data.likeNum;
     }

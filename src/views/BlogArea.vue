@@ -36,19 +36,20 @@
                 <div class="input_box">
                     <el-input
                     placeholder="请输入内容"
-                    v-model="input"
+                    v-model="select"
                     clearable
                     size="small">
                     </el-input>
                 </div>
-                <button>搜索</button>
+                <button class="search" @click="SelectBlog">搜索</button>
             </div>
-            <BlogList :tag="type" v-if="update"/>
+            <BlogList :tag="type" :blogs="blogList" v-if="update"/>
         </div>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import BlogList from '../components/Blog/BlogList';
 
 export default {
@@ -57,10 +58,16 @@ export default {
     BlogList
   },
 
+  computed: {
+    ...mapState(['uId'])
+  },
+
   data () {
     return {
       type: 'all',
-      update: true
+      update: true,
+      select: '',
+      blogList: []
     };
   },
 
@@ -74,6 +81,23 @@ export default {
       this.$nextTick(() => {
         this.update = true;
       });
+    },
+
+    // 搜索博客
+    async SelectBlog () {
+      try {
+        const res = await this.$axios.post(`${this.HOST}/findBlogName`, {
+          u_id: this.uId,
+          name: this.select
+        });
+        const info = res.data;
+        console.log(info);
+        if (info.code === 200) {
+          this.blogList = info.data;
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 };
@@ -108,7 +132,7 @@ export default {
         width: 870px;
 
         .block {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .el-carousel__item h3 {
             color: white;
@@ -129,12 +153,31 @@ export default {
         .select_row {
             width: 100%;
             margin-bottom: 30px;
-            font-size: 24px;
+            font-size: 22px;
             line-height: 24px;
             text-align: right;
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
+            color: #CB7070;
+            i {
+                margin-right: 5px;
+                margin: 3px;
+            }
+        }
+        button {
+            text-decoration: none;
+            padding: 5px 20px;
+            border: 0;
+            background-color: #CB7070;
+            color: #F8F9F9;
+            border-radius: 2px;
+            cursor: pointer;
+            outline: none;
+            margin-left: 10px;
+        }
+        button:hover {
+            box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.17);
         }
     }
     .active {
