@@ -1,7 +1,7 @@
 <template>
     <div id="buildBlog">
         <div class="write">
-            <label for="title">撰写新文章</label>
+            <label for="title">撰写文章</label>
             <input type="text" id="title" v-model="title" placeholder="标题...">
             <div class="edit">
                 <mavon-editor
