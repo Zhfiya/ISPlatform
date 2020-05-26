@@ -25,15 +25,14 @@ export default {
 
   data () {
     return {
-      title: '漏洞制造机',
-      tag: '漏洞专区',
-      author: '嗷嗷',
-      uploadTime: '2020-02-02 20:20:20',
-      like: 1,
+      title: '',
+      tag: '',
+      author: '',
+      uploadTime: '',
+      like: 0,
       isLike: '',
       blogId: 0,
-      content: '<h1><a id="_0"></a>一些坑</h1><p><strong>坑，都是踩着踩着就平了，但还是有必要记录一下</strong></p><h2><a id="CSS_4"></a>CSS</h2><ol><li>' +
-                 '<p><strong>label设置<code>width</code>无效</strong></p><pre><code class="lang-vue">&lt;div class=&quot;row&quot;&gt;&lt;label class=&quot;op&quot;&gt;用户ID：&lt;/label&gt;&lt;label for=&quot;&quot;&gt;{{ this.id }}&lt;/label&gt;&lt;/div&gt;</code></pre></li></ol>'
+      content: ''
     };
   },
 
@@ -50,7 +49,7 @@ export default {
     // 获取blog
     async GetBlogDetail () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/getBlogDetail`, {
+        const res = await this.$axios.post('/getBlogDetail', {
           u_id: this.uId,
           blog_id: this.blogId
         });
@@ -73,7 +72,7 @@ export default {
     // 点赞
     async Star (typeOfLike) {
       try {
-        const res = await this.$axios.post(`${this.HOST}/changeLike`, {
+        const res = await this.$axios.post('/changeLike', {
           u_id: this.uId,
           blog_id: this.blogId,
           typeOfLike: typeOfLike

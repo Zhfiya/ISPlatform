@@ -91,7 +91,7 @@ export default {
     async SubmitLogin () {
       if (this.isValidate) {
         try {
-          const res = await this.$axios.post(`${this.HOST}/login`, {
+          const res = await this.$axios.post('/login', {
             name: this.name,
             password: this.pwd
           });

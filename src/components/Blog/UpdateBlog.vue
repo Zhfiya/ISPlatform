@@ -32,7 +32,7 @@ export default {
   methods: {
     async GetBlog () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/getBlogDetail`, {
+        const res = await this.$axios.post('/getBlogDetail', {
           u_id: this.uId,
           blog_id: this.blogId
         });

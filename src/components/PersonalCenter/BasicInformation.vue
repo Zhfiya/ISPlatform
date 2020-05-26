@@ -50,12 +50,12 @@ export default {
   data () {
     return {
       id: 0,
-      name: 'fine',
+      name: '',
       newName: '',
-      sex: 'female',
+      sex: '',
       newSex: '',
-      email: 'Paranoid_ZH@163.com',
-      introduction: '一二三哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈',
+      email: '',
+      introduction: '',
       NewInfo: '',
 
       nameTip: '',
@@ -102,7 +102,7 @@ export default {
     // 获取信息
     async GetUserInfo () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/getUserInfo`, {
+        const res = await this.$axios.post('/getUserInfo', {
           u_id: this.uId
         });
         const info = res.data.data;
@@ -123,7 +123,7 @@ export default {
       this.nameTip = '';
       if (name) {
         try {
-          const res = await this.$axios.post(`${this.HOST}/checkName`, {
+          const res = await this.$axios.post('/checkName', {
             name: name
           });
           const info = res.data;

@@ -1,7 +1,7 @@
 <template>
     <div id="blogList" v-if="update">
       <div
-      v-for="item in blogList"
+      v-for="item in blogList.slice((currentPage-1)*pageSize,currentPage*pageSize)"
       :key="item.blog_id"
       class="blog">
         <div class="blog_row" @click="ToDetail(item)">
@@ -21,6 +21,15 @@
           </div>
         </div>
       </div>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage"
+        :page-size="pageSize"
+        layout="total, prev, pager, next, jumper"
+        :total="totalCount"
+        class="page">
+      </el-pagination>
     </div>
 </template>
 
@@ -59,6 +68,9 @@ export default {
       blogList: [],
       countList: [],
       deteleBlogId: '',
+      currentPage: 1,
+      totalCount: 0,
+      pageSize: 10,
 
       update: true
     };
@@ -85,6 +97,12 @@ export default {
   },
 
   methods: {
+    handleSizeChange (val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange (val) {
+      this.currentPage = val;
+    },
     // 查看博客
     ToDetail (blog) {
       const blogId = blog.blog_id;
@@ -124,7 +142,7 @@ export default {
     },
     async DeteleBlog () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/deleteBlog`, {
+        const res = await this.$axios.post('/deleteBlog', {
           blog_id: this.deteleBlogId
         });
         const info = res.data;
@@ -153,7 +171,7 @@ export default {
     async OrderBlog () {
       try {
         if (this.order === 'time') {
-          const res = await this.$axios.post(`${this.HOST}/sortBlogByTime`, {
+          const res = await this.$axios.post('/sortBlogByTime', {
             u_id: this.uId,
             tag: this.type,
             typeOfTime: this.typeOfTime
@@ -162,17 +180,19 @@ export default {
           // console.log(info.data);
           if (info.code === 200) {
             this.blogList = info.data;
+            this.totalCount = this.blogList.length;
             this.Count();
             this.$emit('count', this.countList);
           }
         } else {
-          const res = await this.$axios.post(`${this.HOST}/sortBlogByLike`, {
+          const res = await this.$axios.post('/sortBlogByLike', {
             u_id: this.uId,
             tag: this.type
           });
           const info = res.data;
           if (info.code === 200) {
             this.blogList = info.data;
+            this.totalCount = this.blogList.length;
             this.Count();
             this.$emit('count', this.countList);
           }
@@ -185,7 +205,7 @@ export default {
     // 博客区排序
     async OrderBlogArea () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/getAllBlog`, {
+        const res = await this.$axios.post('/getAllBlog', {
           u_id: this.uId,
           tag: this.tag
         });
@@ -193,6 +213,7 @@ export default {
         console.log(info);
         if (info.code === 200) {
           this.blogList = info.data;
+          this.totalCount = this.blogList.length;
         }
       } catch (err) {
         console.log(err);
@@ -264,6 +285,10 @@ export default {
         cursor: pointer;
       }
     }
+  }
+  .page {
+    margin: 20px 0;
+    text-align: center;
   }
 }
 </style>

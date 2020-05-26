@@ -48,7 +48,7 @@ export default {
     // 获取队伍信息
     async GetTeamInfo () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/getTeamInfo`, {
+        const res = await this.$axios.post('/getTeamInfo', {
           u_id: this.uId
         });
         const info = res.data;
@@ -66,7 +66,7 @@ export default {
     // 退出队伍
     async QuitTeam () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/quitTeam`, {
+        const res = await this.$axios.post('/quitTeam', {
           u_id: this.uId,
           team_id: this.teamId
         });
@@ -89,47 +89,49 @@ export default {
 
 <style lang="less" scoped>
 #hasTeam {
+  .name {
+    font-weight: bold;
+    font-size: 140%;
+    color: #1D3F62;
+    background-color: rgb(221, 165, 45);
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  i {
+    margin-right: 10px;
+  }
+  .row {
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
 
-    .name {
-        font-weight: bold;
-        font-size: 140%;
-        color: #1D3F62;
+    span {
+      width: 150px;
+      padding: 10px 30px;
+      text-align: center;
     }
-    i {
-        margin-right: 10px;
-    }
-    .row {
-        margin-top: 3%;
-        display: flex;
-        flex-direction: row;
+    .id {
 
-        span {
-            width: 150px;
-            padding: 10px 30px;
-            text-align: center;
-        }
-        .id {
-
-        }
-        .head {
-            font-weight: bold;
-        }
     }
-    .submit {
-        margin-top: 100px;
+    .head {
+      font-weight: bold;
     }
-    button {
-      text-decoration: none;
-      padding: 5px 10px;
-      border: 0;
-      background-color: #CB7070;
-      color: #F8F9F9;
-      border-radius: 2px;
-      cursor: pointer;
-      outline: none;
-    }
-    button:hover {
-      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.17);
-    }
+  }
+  .submit {
+    margin-top: 100px;
+  }
+  button {
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 0;
+    background-color: #CB7070;
+    color: #F8F9F9;
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+  }
+  button:hover {
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.17);
+  }
 }
 </style>

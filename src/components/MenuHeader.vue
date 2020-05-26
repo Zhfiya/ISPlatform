@@ -1,16 +1,20 @@
 <template>
-    <div id="menuHeader">
-        <label @click="GoToIndex">Information Security</label>
-        <ul>
-            <li><a href="">CTF</a></li>
-            <li><a href=" ">AWD</a></li>
-            <li><a href="/blogArea">博客区</a></li>
-            <li><a href="/login" v-if="!isLogin">登录</a></li>
-            <li><a href="/register" v-if="!isLogin">注册</a></li>
-            <li><a href="/personalCenter" v-if="isLogin">个人中心</a></li>
-            <li><a @click="Logout" v-if="isLogin">退出登录</a></li>
-        </ul>
+  <div id="menuHeader">
+    <div class="title">
+      <div @click="GoToIndex" class="title">
+        <img src="../assets/security.png" alt="">
+        线上AWD
+      </div>
     </div>
+    <ul>
+        <li><a href=" ">AWD</a></li>
+        <li><a href="/blogArea">博客区</a></li>
+        <li><a href="/login" v-if="!isLogin">登录</a></li>
+        <li><a href="/register" v-if="!isLogin">注册</a></li>
+        <li><a href="/personalCenter" v-if="isLogin">个人中心</a></li>
+        <li><a @click="Logout" v-if="isLogin">退出登录</a></li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -27,7 +31,7 @@ export default {
     // 退出登录
     async Logout () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/logout`, {});
+        const res = await this.$axios.post('/logout', {});
         const info = res.data;
         if (info.code === 200) {
           this.$message({
@@ -66,12 +70,18 @@ export default {
   background-color: #1B314A;
   display: inline-block;
 
-  label{
+  img {
+    width: 30px;
+    height: 30px;
+  }
+  .title{
     color: white;
-    font-size: 33px;
+    font-size: 22px;
+    font-weight: bolder;
     float: left;
-    margin-left: 10%;
-    margin-top: 10px;
+    margin-left: 7%;
+    line-height: 60px;
+    width: 300px;
     cursor: pointer;
   }
   ul {

@@ -13,8 +13,7 @@ Vue.use(ElementUI);
 
 Vue.prototype.$axios = axios;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
-
-Vue.prototype.HOST = 'api';
+axios.defaults.baseURL = 'api';
 
 Vue.config.productionTip = false;
 

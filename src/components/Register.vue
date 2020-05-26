@@ -89,7 +89,7 @@ export default {
     async CheckName (name) {
       if (name) {
         try {
-          const res = await this.$axios.post(`${this.HOST}/checkName`, {
+          const res = await this.$axios.post('/checkName', {
             name: name
           });
           const info = res.data;
@@ -111,7 +111,7 @@ export default {
     async GetCode () {
       if (this.Validate() && this.registerOk) {
         try {
-          const res = await this.$axios.post(`${this.HOST}/sendNewMail`, {
+          const res = await this.$axios.post('/sendNewMail', {
             email: this.email
           });
           const info = res.data;
@@ -141,7 +141,7 @@ export default {
     async Submit () {
       if (this.Validate && this.code !== null) {
         try {
-          const res = await this.$axios.post(`${this.HOST}/register`, {
+          const res = await this.$axios.post('/register', {
             name: this.name,
             password: this.pwd,
             email: this.email,

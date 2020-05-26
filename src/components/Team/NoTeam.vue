@@ -66,7 +66,7 @@ export default {
     // 创建
     async CreateTeam () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/createTeam`, {
+        const res = await this.$axios.post('/createTeam', {
           u_id: this.uId,
           team_name: this.name,
           member_num: this.number
@@ -92,7 +92,7 @@ export default {
     // 加入
     async JoinTeam () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/joinTeam`, {
+        const res = await this.$axios.post('/joinTeam', {
           u_id: this.uId,
           team_id: this.id
         });

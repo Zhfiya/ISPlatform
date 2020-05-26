@@ -86,7 +86,7 @@ export default {
     // 搜索博客
     async SelectBlog () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/findBlogName`, {
+        const res = await this.$axios.post('/findBlogName', {
           u_id: this.uId,
           name: this.select
         });

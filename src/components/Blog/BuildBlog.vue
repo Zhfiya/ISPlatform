@@ -16,7 +16,7 @@
         <div class="tag_list">
             <div class="row">
                 <label><i class="el-icon-collection-tag"></i>分类：</label>
-                <label>{{ this.tag }}</label>
+                <label class="tag_ing">{{ this.tag }}</label>
             </div>
             <span @click="SelectTag('漏洞专区')">
                 <i class="el-icon-d-arrow-right"></i>
@@ -141,10 +141,10 @@ export default {
     async NewBlog () {
       if (this.VailDate()) {
         try {
-          const res = await this.$axios.post(`${this.HOST}/addBlog`, {
+          const res = await this.$axios.post('/addBlog', {
             u_id: this.uId,
             name: this.title,
-            text: this.html,
+            html: this.html,
             content: this.content,
             tag: this.tag
           });
@@ -170,10 +170,11 @@ export default {
     // 修改博客
     async UpdateBlog () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/updateBlog`, {
+        const res = await this.$axios.post('/updateBlog', {
           blog_id: this.blogId,
           name: this.title,
-          text: this.html,
+          html: this.html,
+          content: this.content,
           tag: this.tag
         });
         const info = res.data;
@@ -254,6 +255,11 @@ export default {
 
     .row {
       margin-bottom: 5%;
+      .tag_ing{
+        background-color:rgb(251, 226,81);
+        padding: 5px;
+        border-radius: 2px;
+      }
     }
     label {
       color: #BC3520;

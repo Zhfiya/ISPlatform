@@ -89,7 +89,7 @@ export default {
     // 发送验证码
     async Check () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/sendMail`, {
+        const res = await this.$axios.post('/sendMail', {
           email: this.email
         });
         const info = res.data;
@@ -117,7 +117,7 @@ export default {
     // 验证新邮箱
     async CheckCode () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/sendNewMail`, {
+        const res = await this.$axios.post('/sendNewMail', {
           email: this.newEmail
         });
         const info = res.data;
@@ -140,7 +140,7 @@ export default {
     // 提交验证码
     async SubmitCode () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/checkCode`, {
+        const res = await this.$axios.post('/checkCode', {
           email: this.email,
           verifyCode: this.code
         });
@@ -162,7 +162,7 @@ export default {
     // 修改密码
     async SubmitNewPwd () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/updatePassword`, {
+        const res = await this.$axios.post('/updatePassword', {
           u_id: this.uId,
           password: this.newPwd
         });
@@ -186,7 +186,7 @@ export default {
     // 修改邮箱
     async SubmitNewEmail () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/updateEmail`, {
+        const res = await this.$axios.post('/updateEmail', {
           u_id: this.uId,
           email: this.newEmail,
           verifyCode: this.newCode
@@ -231,7 +231,7 @@ export default {
     // 获取邮箱
     async GetInfo () {
       try {
-        const res = await this.$axios.post(`${this.HOST}/getUserInfo`, {
+        const res = await this.$axios.post('/getUserInfo', {
           u_id: this.uId
         });
         const info = res.data;
