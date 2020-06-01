@@ -44,6 +44,11 @@ const routes = [
     path: '/blogArea',
     name: 'blogArea',
     component: () => import('../views/BlogArea')
+  },
+  {
+    path: '/setPwd',
+    name: 'setPwd',
+    component: () => import('../components/SetPwd.vue')
   }
 ];
 

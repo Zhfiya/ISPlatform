@@ -5,7 +5,7 @@
         <label>{{ this.matchIng.match_name }}</label>
         <div class="info">
           <label>{{ this.matchIng.end_time }}</label>
-          <label>邀请码：{{ this.matchIng.visit_code }}</label>
+          <label v-if="!this.matchIng._full">邀请码：{{ this.matchIng.visit_code }}</label>
         </div>
       </div>
       <div v-else>

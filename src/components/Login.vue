@@ -21,7 +21,7 @@
             <button @click="SubmitLogin">登录</button>
           </div>
           <div class="row">
-            <label>忘记密码？</label>
+            <label @click="SetPwd">忘记密码？</label>
           </div>
         </div>
       </div>
@@ -75,6 +75,9 @@ export default {
   },
 
   methods: {
+    SetPwd () {
+      window.location.href = '/setPwd';
+    },
     // 检验字段完整性
     isValidate () {
       if (this.name === '') {
