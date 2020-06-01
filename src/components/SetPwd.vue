@@ -53,7 +53,7 @@ export default {
       code: '',
       imgUrl: require('../assets/login_backgroud.jpg'),
 
-      ischeck: true
+      ischeck: false
     };
   },
 
@@ -99,11 +99,16 @@ export default {
       if (this.pwd === this.pwdTwo) {
         try {
           const res = await this.$axios.post('/updatePassword', {
-            email: this.pwd
+            u_id: this.email,
+            password: this.pwd
           });
           const info = res.data;
           if (info.code === 200) {
-            this.ischeck = true;
+            this.$message({
+              type: 'success',
+              message: '修改成功'
+            });
+            window.location.href = '/';
           } else {
             this.$message({
               type: 'error',
