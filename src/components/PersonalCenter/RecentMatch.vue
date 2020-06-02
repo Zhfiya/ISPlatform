@@ -1,7 +1,7 @@
 <template>
     <div id="recentMatch">
       <label class="title">系统正在进行比赛：</label>
-      <div class="match ing" v-if="matchIng">
+      <div class="match ing" v-if="matchIng.length > 0">
         <label>{{ this.matchIng.match_name }}</label>
         <div class="info">
           <label>{{ this.matchIng.end_time }}</label>
@@ -13,7 +13,7 @@
       </div>
       <el-divider class="divider"></el-divider>
       <label class="title">往期赛事：</label>
-      <div v-if="matchDone">
+      <div v-if="matchDone.length > 0">
         <div
         v-for="item in matchDone"
         :key="item.match_name"
@@ -42,7 +42,8 @@ export default {
   data () {
     return {
       matchIng: [],
-      matchDone: []
+      matchDone: [],
+      isShow: false
     };
   },
 
@@ -59,7 +60,12 @@ export default {
           uid: this.uId
         });
         const info = res.data;
-        this.matchIng = info.data;
+        if (info.code === 200) {
+          this.matchIng = info.data;
+          this.isShow = true;
+        } else if (info.code === 409) {
+          this.sessionJudge();
+        }
       } catch (err) {
         console.log(err);
       }
@@ -71,7 +77,12 @@ export default {
           uid: this.uId
         });
         const info = res.data;
-        this.matchDone = info.data;
+        if (info.code === 200) {
+          this.matchDone = info.data;
+          this.isShow = true;
+        } else if (info.code === 409) {
+          this.sessionJudge();
+        }
       } catch (err) {
         console.log(err);
       }

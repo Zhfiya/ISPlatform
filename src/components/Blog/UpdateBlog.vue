@@ -39,6 +39,8 @@ export default {
         const info = res.data;
         if (info.code === 200) {
           this.blog = info.data;
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'error',

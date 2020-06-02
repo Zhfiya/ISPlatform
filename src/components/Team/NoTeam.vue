@@ -78,6 +78,8 @@ export default {
             message: '创建成功'
           });
           this.$store.dispatch('set_teamId', info.data);
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'error',
@@ -103,6 +105,8 @@ export default {
             message: '加入成功'
           });
           this.$store.dispatch('set_teamId', this.id);
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'error',

@@ -64,6 +64,8 @@ export default {
           this.isLike = infodata.is_like;
           this.content = infodata.html;
           this.author = infodata.author_name;
+        } else if (info.code === 409) {
+          this.sessionJudge();
         }
       } catch (err) {
         console.log(err);
@@ -87,6 +89,8 @@ export default {
             this.Like = this.like--;
             this.isLike = 'false';
           }
+        } else if (info.code === 409) {
+          this.sessionJudge();
         }
       } catch (err) {
         console.log(err);

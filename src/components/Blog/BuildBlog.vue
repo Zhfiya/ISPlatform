@@ -156,6 +156,8 @@ export default {
               type: 'success',
               message: '提交成功'
             });
+          } else if (info.code === 409) {
+            this.sessionJudge();
           } else {
             this.$message({
               type: 'error',
@@ -184,6 +186,8 @@ export default {
             type: 'success',
             message: '修改成功'
           });
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'error',

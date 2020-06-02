@@ -7,7 +7,7 @@
       </div>
     </div>
     <ul>
-        <li><a href=" ">AWD</a></li>
+        <li><a @click="OpenAwd">AWD</a></li>
         <li><a href="/blogArea">博客区</a></li>
         <li><a href="/login" v-if="!isLogin">登录</a></li>
         <li><a href="/register" v-if="!isLogin">注册</a></li>
@@ -28,6 +28,9 @@ export default {
   },
 
   methods: {
+    OpenAwd () {
+      window.open('http://47.115.18.243/awd-lastest/', '_blank');
+    },
     // 退出登录
     async Logout () {
       try {
@@ -40,6 +43,8 @@ export default {
           });
           this.$store.dispatch('set_Login', false);
           window.location.href = '/';
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'error',

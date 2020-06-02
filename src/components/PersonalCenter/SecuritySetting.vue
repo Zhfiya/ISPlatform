@@ -104,6 +104,8 @@ export default {
           }, 1000);
           this.isCheck = true;
           this.isSend = false;
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'error',
@@ -126,6 +128,8 @@ export default {
             type: 'success',
             message: '发送成功！'
           });
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'error',
@@ -148,6 +152,8 @@ export default {
         if (info.code === 200) {
           this.isOk = true;
           this.isCheck = false;
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'success',
@@ -173,6 +179,8 @@ export default {
             message: '修改成功'
           });
           this.pwdShow = false;
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'error',
@@ -198,6 +206,8 @@ export default {
             message: '修改成功！'
           });
           this.emailShow = false;
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'error',
@@ -238,6 +248,8 @@ export default {
         // console.log(info);
         if (info.code === 200) {
           this.email = info.data.email;
+        } else if (info.code === 409) {
+          this.sessionJudge();
         }
       } catch (err) {
         console.log(err);

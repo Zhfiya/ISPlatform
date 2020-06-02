@@ -57,6 +57,8 @@ export default {
           this.teamName = info.data.team_name;
           this.teamId = info.data.team_id;
           this.teamMember = info.data.member;
+        } else if (info.code === 409) {
+          this.sessionJudge();
         }
       } catch (err) {
         console.log(err);
@@ -78,6 +80,8 @@ export default {
             message: '退队成功！'
           });
           this.$store.dispatch('set_teamId', null);
+        } else if (info.code === 409) {
+          this.sessionJudge();
         }
       } catch (err) {
         console.log(err);

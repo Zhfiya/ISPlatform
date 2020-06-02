@@ -113,6 +113,9 @@ export default {
         this.email = info.email;
         this.introduction = info.information;
         this.$store.dispatch('set_teamId', info.team_id);
+        if (info.code === 409) {
+          this.sessionJudge();
+        }
       } catch (err) {
         console.log(err);
       }

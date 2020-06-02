@@ -21,15 +21,17 @@
           </div>
         </div>
       </div>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage"
-        :page-size="pageSize"
-        layout="total, prev, pager, next, jumper"
-        :total="totalCount"
-        class="page">
-      </el-pagination>
+      <div v-if="blogList.length > 0">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page.sync="currentPage"
+          :page-size="pageSize"
+          layout="total, prev, pager, next, jumper"
+          :total="totalCount"
+          class="page">
+        </el-pagination>
+      </div>
     </div>
 </template>
 
@@ -156,6 +158,8 @@ export default {
             this.OrderBlog();
           });
           this.deteleBlogId = '';
+        } else if (info.code === 409) {
+          this.sessionJudge();
         } else {
           this.$message({
             type: 'error',
@@ -183,6 +187,8 @@ export default {
             this.totalCount = this.blogList.length;
             this.Count();
             this.$emit('count', this.countList);
+          } else if (info.code === 409) {
+            this.sessionJudge();
           }
         } else {
           const res = await this.$axios.post('/sortBlogByLike', {
@@ -195,6 +201,8 @@ export default {
             this.totalCount = this.blogList.length;
             this.Count();
             this.$emit('count', this.countList);
+          } else if (info.code === 409) {
+            this.sessionJudge();
           }
         }
       } catch (err) {
@@ -214,6 +222,8 @@ export default {
         if (info.code === 200) {
           this.blogList = info.data;
           this.totalCount = this.blogList.length;
+        } else if (info.code === 409) {
+          this.sessionJudge();
         }
       } catch (err) {
         console.log(err);

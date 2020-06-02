@@ -11,7 +11,7 @@
       <div class="center">
         <div class="center_row">
           <input type="text" v-model="name" placeholder="用户名...">
-          <span v-if="this.nameTip"><i class="el-icon-warning"></i>{{ nameTip }}</span>
+          <span v-if="this.nameTip" :class="{green:this.nameOk}"><i class="el-icon-warning"></i>{{ nameTip }}</span>
         </div>
         <div class="center_row">
           <input type="password" v-model="pwd" placeholder="密码...">
@@ -57,6 +57,7 @@ export default {
 
       isOk: true,
       registerOk: false,
+      nameOk: false,
       nameTip: '',
       pwdTip: '',
       pwdTwoTip: '',
@@ -96,8 +97,10 @@ export default {
           if (info.code !== 200) {
             this.nameTip = '该用户名已存在！';
             this.registerOk = false;
+            this.nameOk = false;
           } else {
             this.nameTip = '该用户名可以使用';
+            this.nameOk = true;
             this.registerOk = true;
           }
           console.log(res);
@@ -166,6 +169,7 @@ export default {
       let registerOk = false;
       if (!this.name) {
         this.nameTip = '用户名不能为空';
+        this.nameOk = false;
         registerOk = false;
       }
       if (this.pwd.length < 7) {
@@ -237,6 +241,7 @@ export default {
     .center_row {
       margin-left: 15%;
       margin-top: 20px;
+      color: #BC3520;
 
       button {
         height: 30px;
@@ -253,7 +258,6 @@ export default {
       }
       span {
         margin-left: 20px;
-        color: #BC3520;
       }
     }
     input {
@@ -280,6 +284,9 @@ export default {
     }
     button.submit:hover {
       box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.17);
+    }
+    .green {
+      color: green;
     }
   }
 }
