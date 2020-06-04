@@ -51,8 +51,16 @@
             <BlogList :tag="type" :blogs="blogList" v-if="update"/>
         </div>
         <div class="links">
-            <span>友链</span>
+            <span class="lin">链接</span>
             <div class="link_box">
+                <a href="http://148.70.34.179/build/" target="_blank">ring_ring's blog</a>
+                <a href="https://www.freebuf.com/" target="_blank">freebuf</a>
+                <a href="https://xz.aliyun.com/" target="_blank">先知社区</a>
+                <a href="http://ctf.john30n.com/ " target="_blank">John30n的ctf平台</a>
+                <a href="http://39.108.78.246/" target="_blank">John30n的博客</a>
+                <a href="http://blog.knownsec.com/Knownsec_RD_Checklist/ " target="_blank">知道创宇研发技能表</a>
+                <a href="http://www.ichunqiu.com/" target="_blank">i春秋平台</a>
+                <a href="https://wooyun.laolisafe.com/ " target="_blank">乌云镜像</a>
             </div>
         </div>
     </div>
@@ -224,12 +232,19 @@ export default {
             height: 220px;
             margin-top: 10px;
             background-color: #F1F1F1;
+            display: flex;
+            flex-direction: column;
+            line-height: 25px;
         }
-        span {
+        span.lin {
             background-color:coral;
             width: 35px;
             padding: 5px;
             border-radius: 2px;
+        }
+        a {
+            font-size: 14px;
+            letter-spacing: 5px;
         }
     }
     .active {

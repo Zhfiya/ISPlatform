@@ -84,7 +84,10 @@ export default {
         });
         const info = res.data;
         if (info.code === 200) {
-          this.ischeck = true;
+          this.$message({
+            type: 'success',
+            message: '验证码发送成功'
+          });
         } else {
           this.$message({
             type: 'error',
