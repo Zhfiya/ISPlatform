@@ -57,7 +57,7 @@ export default {
     async GetMatchIng () {
       try {
         const res = await this.$axios.post('/getRecentMatch', {
-          uid: this.uId
+          u_id: this.uId
         });
         const info = res.data;
         if (info.code === 200) {
@@ -74,7 +74,7 @@ export default {
     async GetMatchDone () {
       try {
         const res = await this.$axios.post('/getUserMatchInfo', {
-          uid: this.uId
+          u_id: this.uId
         });
         const info = res.data;
         if (info.code === 200) {
