@@ -1,7 +1,7 @@
 <template>
     <div id="recentMatch">
       <label class="title">系统正在进行比赛：</label>
-      <div class="match ing" v-if="matchIng.length > 0">
+      <div class="match ing" v-if="matchIng">
         <label>{{ this.matchIng.match_name }}</label>
         <div class="info">
           <label>{{ this.matchIng.end_time }}</label>
@@ -41,7 +41,7 @@ export default {
 
   data () {
     return {
-      matchIng: [],
+      matchIng: '',
       matchDone: [],
       isShow: false
     };
@@ -56,9 +56,7 @@ export default {
     // 获取正在进行的比赛
     async GetMatchIng () {
       try {
-        const res = await this.$axios.post('/getRecentMatch', {
-          u_id: this.uId
-        });
+        const res = await this.$axios.post('/getRecentMatch', {});
         const info = res.data;
         if (info.code === 200) {
           this.matchIng = info.data;
